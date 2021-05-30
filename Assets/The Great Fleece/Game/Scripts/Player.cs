@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     // handle to nav mesh agent
     private NavMeshAgent _agent;
 
+    [SerializeField] private Animator _animator;
+
 
     private void Start()
     {
@@ -27,9 +29,11 @@ public class Player : MonoBehaviour
             {
                 Debug.Log(hitInfo.point); // hitInfo.transform.position will return the transform.position of the object hit, not that of the point of collision
                 _agent.SetDestination(hitInfo.point);
+                _animator.SetBool("Moving", true);
                 // _lineRenderer.SetPosition(0, this.transform.position);
             }
         }
+
 
     }
 }
