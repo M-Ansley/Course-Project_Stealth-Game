@@ -35,5 +35,26 @@ public class Player : MonoBehaviour
         }
 
 
+        if (!_agent.pathPending)
+        {
+            if (_agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
+                {
+                    _animator.SetBool("Moving", false);
+                }
+            }
+        }
+
+        //float dist = _agent.remainingDistance;
+
+        //if (dist != Mathf.Infinity && _agent.pathStatus == NavMeshPathStatus.PathComplete && _agent.remainingDistance == 0) // remaining distance appears to be Mathf.Infinity until the agent becomes relatively close to teh destination. Not a value we can rely on.
+        //{
+        //    _animator.SetBool("Moving", false);
+        //}
+
+
+
+
     }
 }
