@@ -24352,6 +24352,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1271638382}
+  _coinPrefab: {fileID: 5911408504076834286, guid: 8a15fec8842c1454493021797f4df502,
+    type: 3}
+  _coinTossSound: {fileID: 8300000, guid: 7a03079805ab64c8ea844d80fdc43366, type: 3}
 --- !u!54 &970899151
 Rigidbody:
   m_ObjectHideFlags: 0

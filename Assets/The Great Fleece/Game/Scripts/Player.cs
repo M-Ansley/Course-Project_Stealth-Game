@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Animator _animator;
 
+    [Header("Coin")]
+    private int _coinsToToss = 1;
+    [SerializeField] private GameObject _coinPrefab = null;
+    [SerializeField] private AudioClip _coinTossSound = null;
 
     private void Start()
     {
@@ -33,6 +37,17 @@ public class Player : MonoBehaviour
                 // _lineRenderer.SetPosition(0, this.transform.position);
             }
         }
+        else if (Input.GetMouseButtonDown(1) && _coinsToToss > 0)
+        {            
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                TossCoin(hitInfo.point);
+                // _lineRenderer.SetPosition(0, this.transform.position);
+            }
+        }
 
 
         if (!_agent.pathPending)
@@ -46,6 +61,8 @@ public class Player : MonoBehaviour
             }
         }
 
+
+
         //float dist = _agent.remainingDistance;
 
         //if (dist != Mathf.Infinity && _agent.pathStatus == NavMeshPathStatus.PathComplete && _agent.remainingDistance == 0) // remaining distance appears to be Mathf.Infinity until the agent becomes relatively close to teh destination. Not a value we can rely on.
@@ -56,5 +73,13 @@ public class Player : MonoBehaviour
 
 
 
+    }
+
+
+    private void TossCoin(Vector3 position)
+    {
+        GameObject coin = Instantiate(_coinPrefab, position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(_coinTossSound, position);
+        _coinsToToss--;
     }
 }
