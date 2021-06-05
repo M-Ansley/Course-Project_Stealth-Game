@@ -5,9 +5,12 @@ using UnityEngine;
 public class LookAtPlayer : MonoBehaviour
 {
     private GameObject _player;
+    public Transform startCamera;
 
     private void Start()
     {
+        transform.position = startCamera.position;
+        transform.rotation = startCamera.rotation;
         if (FindObjectOfType<Player>() != null)
         {
             _player = FindObjectOfType<Player>().gameObject;

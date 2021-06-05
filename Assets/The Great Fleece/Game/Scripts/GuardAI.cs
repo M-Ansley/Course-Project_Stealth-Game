@@ -19,13 +19,23 @@ public class GuardAI : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-        //if (_waypoints.Count > 0)
-        //{
-        //    if (_waypoints[0] != null)
-        //    {
-        //        _currentTarget = _waypoints[0];
-        //    }
-        //}
+        SetStartingAnim();
+
+    }
+
+    private void SetStartingAnim()
+    {
+        if (_animator != null)
+        {
+            if (_waypoints.Count > 0)
+            {
+                _animator.SetBool("Moving", true);
+            }
+            else
+            {
+                _animator.SetBool("Moving", false);
+            }
+        }
     }
 
     private void Update()
@@ -43,11 +53,13 @@ public class GuardAI : MonoBehaviour
                     {
                         if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
                         {
+                            bool endPosition = false;
                             if (_moveUp)
                             {
                                 if (_currentTargetIndex + 1 >= _waypoints.Count)
                                 {
                                     _currentTargetIndex--;
+                                    endPosition = true;
                                     _moveUp = false;
                                 }
                                 else
@@ -60,6 +72,7 @@ public class GuardAI : MonoBehaviour
                                 if (_currentTargetIndex - 1 < 0)
                                 {
                                     _currentTargetIndex++;
+                                    endPosition = true;
                                     _moveUp = true;
                                 }
                                 else
@@ -68,7 +81,7 @@ public class GuardAI : MonoBehaviour
                                 }
                             }
                             _targetReached = true;
-                            StartCoroutine(WaitBeforeMoving());
+                            StartCoroutine(WaitBeforeMoving(endPosition));
                         }
                     }
                 }
@@ -99,12 +112,17 @@ public class GuardAI : MonoBehaviour
     }
 
 
-    private IEnumerator WaitBeforeMoving()
+    private IEnumerator WaitBeforeMoving(bool endPosition)
     {
-        _animator.SetBool("Moving", false);
-        float randomPause = Random.Range(2, 5);
-        yield return new WaitForSecondsRealtime(randomPause);
-        _animator.SetBool("Moving", true);
+        if (endPosition)
+        {
+            if (_animator != null)
+                _animator.SetBool("Moving", false);
+            float randomPause = Random.Range(2, 5);
+            yield return new WaitForSecondsRealtime(randomPause);
+            if (_animator != null)
+                _animator.SetBool("Moving", true);
+        }
         _targetReached = false;
     }
 
