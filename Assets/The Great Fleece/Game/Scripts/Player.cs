@@ -38,13 +38,19 @@ public class Player : MonoBehaviour
             }
         }
         else if (Input.GetMouseButtonDown(1) && _coinsToToss > 0)
-        {            
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                TossCoin(hitInfo.point);
+                //Debug.Log(hitInfo.collider.tag);
+
+                //if (hitInfo.collider.CompareTag("Floor"))
+                //{
+                    TossCoin(hitInfo.point);
+
+               // }
                 // _lineRenderer.SetPosition(0, this.transform.position);
             }
         }
@@ -83,4 +89,4 @@ public class Player : MonoBehaviour
         GameEvents.current.CoinTossed(position); // calls a Vector3 Event for the guards to listen to. 
         _coinsToToss--;
     }
- }
+}

@@ -14355,7 +14355,7 @@ GameObject:
   - component: {fileID: 503884725}
   m_Layer: 0
   m_Name: Point_E
-  m_TagString: Guard1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23046,7 +23046,7 @@ GameObject:
   - component: {fileID: 920827067}
   m_Layer: 0
   m_Name: Point_C
-  m_TagString: Guard1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32131,7 +32131,7 @@ GameObject:
   - component: {fileID: 1413841693}
   m_Layer: 0
   m_Name: Floor_TopFloor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -49816,7 +49816,7 @@ GameObject:
   - component: {fileID: 2031604214}
   m_Layer: 0
   m_Name: Point_F
-  m_TagString: Guard1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51190,7 +51190,7 @@ GameObject:
   - component: {fileID: 2098299294}
   m_Layer: 0
   m_Name: Point_G
-  m_TagString: Guard1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52283,7 +52283,7 @@ GameObject:
   - component: {fileID: 330297539781692119}
   m_Layer: 0
   m_Name: Point_A
-  m_TagString: Guard1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52313,7 +52313,7 @@ GameObject:
   - component: {fileID: 5055168183428647076}
   m_Layer: 0
   m_Name: Point_D
-  m_TagString: Guard1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52329,7 +52329,7 @@ GameObject:
   - component: {fileID: 6425928672133878034}
   m_Layer: 0
   m_Name: Point_B
-  m_TagString: Guard1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

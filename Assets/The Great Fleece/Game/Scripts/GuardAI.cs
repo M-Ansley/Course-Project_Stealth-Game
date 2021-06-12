@@ -9,7 +9,8 @@ public class GuardAI : MonoBehaviour
     private NavMeshAgent _agent;
     private int _currentTargetIndex = 0;
 
-    private float _coinDetectionDistance = 10f;
+    private Vector3 _coinPos = new Vector3();
+    private float _coinDetectionDistance = 15f;
 
     private Animator _animator;
 
@@ -99,17 +100,24 @@ public class GuardAI : MonoBehaviour
 
         if (_coinDetected)
         {
-            if (!_agent.pathPending)
-            {
-                if (_agent.remainingDistance <= _agent.stoppingDistance)
-                {
-                    if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
-                    {
-                        StartCoroutine(WaitBeforeMoving(true));
+            float distance = Vector3.Distance(transform.position, _coinPos);
 
-                    }
-                }
+            if (distance <= 4)
+            {
+                StartCoroutine(WaitBeforeMoving(true));
+
             }
+
+            //if (!_agent.pathPending)
+            //{
+            //    if (_agent.remainingDistance <= _agent.stoppingDistance)
+            //    {
+            //        if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
+            //        {
+
+            //        }
+            //    }
+            //}
         }
     }
 
@@ -135,6 +143,7 @@ public class GuardAI : MonoBehaviour
         if (Vector3.Distance(coinPosition, transform.position) < _coinDetectionDistance)
         {
             _coinDetected = true;
+            _coinPos = coinPosition;
             _animator.SetBool("Moving", true);
             _agent.SetDestination(coinPosition);
         }
