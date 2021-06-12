@@ -10,7 +10,7 @@ public class GuardAI : MonoBehaviour
     private int _currentTargetIndex = 0;
 
     private Vector3 _coinPos = new Vector3();
-    private float _coinDetectionDistance = 15f;
+    private float _coinDetectionDistance = 20f;
 
     private Animator _animator;
 
@@ -106,18 +106,7 @@ public class GuardAI : MonoBehaviour
             {
                 StartCoroutine(WaitBeforeMoving(true));
 
-            }
-
-            //if (!_agent.pathPending)
-            //{
-            //    if (_agent.remainingDistance <= _agent.stoppingDistance)
-            //    {
-            //        if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
-            //        {
-
-            //        }
-            //    }
-            //}
+            }                       
         }
     }
 

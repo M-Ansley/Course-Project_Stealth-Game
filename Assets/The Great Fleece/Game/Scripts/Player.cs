@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
                 Debug.Log(hitInfo.point); // hitInfo.transform.position will return the transform.position of the object hit, not that of the point of collision
                 _agent.SetDestination(hitInfo.point);
                 _animator.SetBool("Moving", true);
-                // _lineRenderer.SetPosition(0, this.transform.position);
             }
         }
         else if (Input.GetMouseButtonDown(1) && _coinsToToss > 0)
@@ -44,14 +43,8 @@ public class Player : MonoBehaviour
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                //Debug.Log(hitInfo.collider.tag);
-
-                //if (hitInfo.collider.CompareTag("Floor"))
-                //{
-                    TossCoin(hitInfo.point);
-
-               // }
-                // _lineRenderer.SetPosition(0, this.transform.position);
+                Debug.Log(hitInfo.collider.gameObject.name);
+                TossCoin(hitInfo.point);
             }
         }
 
@@ -82,10 +75,22 @@ public class Player : MonoBehaviour
     }
 
 
+    private IEnumerator PauseMovement(float duration)
+    {
+        _agent.isStopped = true;
+        yield return new WaitForSecondsRealtime(duration);
+        _agent.isStopped = false;
+    }
+
+
     private void TossCoin(Vector3 position)
     {
         GameObject coin = Instantiate(_coinPrefab, position, Quaternion.identity);
         AudioSource.PlayClipAtPoint(_coinTossSound, position);
+
+        StartCoroutine(PauseMovement(1.5f));
+        _animator.SetTrigger("Throw");
+        transform.LookAt(position);
         GameEvents.current.CoinTossed(position); // calls a Vector3 Event for the guards to listen to. 
         _coinsToToss--;
     }
