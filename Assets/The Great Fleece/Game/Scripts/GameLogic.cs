@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameLogic : MonoBehaviour
 {
-
+    [SerializeField] private GameObject _player = null;
     [SerializeField] private GameObject _gameOverCutscene = null;
 
     [HideInInspector]
@@ -20,6 +20,7 @@ public class GameLogic : MonoBehaviour
         if (!gameOver)
         {
             _gameOverCutscene.SetActive(true);
+            _player.SetActive(false);
             gameOver = true;
         }
     }
@@ -27,6 +28,7 @@ public class GameLogic : MonoBehaviour
     public void ResetGame()
     {
         _gameOverCutscene.SetActive(false);
+        _player.SetActive(true);
         gameOver = false;
     }
 
