@@ -9,18 +9,27 @@ public class GuardAI : MonoBehaviour
     private NavMeshAgent _agent;
     private int _currentTargetIndex = 0;
 
+    private float _coinDetectionDistance = 10f;
+
     private Animator _animator;
 
     private bool _moveUp = true;
 
     private bool _targetReached = false;
 
+    private bool _coinDetected = false;
+
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         SetStartingAnim();
+        ListenToEvents();
+    }
 
+    private void ListenToEvents()
+    {
+        GameEvents.current.coinTossed.AddListener(CoinTossed);
     }
 
     private void SetStartingAnim()
@@ -40,7 +49,7 @@ public class GuardAI : MonoBehaviour
 
     private void Update()
     {
-        if (!_targetReached)
+        if (!_targetReached && !_coinDetected)
         {
 
             if (_waypoints.Count > 0 && _waypoints[_currentTargetIndex] != null)
@@ -88,27 +97,20 @@ public class GuardAI : MonoBehaviour
             }
         }
 
+        if (_coinDetected)
+        {
+            if (!_agent.pathPending)
+            {
+                if (_agent.remainingDistance <= _agent.stoppingDistance)
+                {
+                    if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
+                    {
+                        StartCoroutine(WaitBeforeMoving(true));
 
-
-        //if (_currentTarget != null)
-        //{
-        //    _agent.SetDestination(_currentTarget.position);
-
-
-        //    if (!_agent.pathPending)
-        //    {
-        //        if (_agent.remainingDistance <= _agent.stoppingDistance)
-        //        {
-        //            if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
-        //            {
-        //                // HAS REACHED destination
-        //                _currentTarget = _waypoints[1];
-        //            }
-        //        }
-        //    }
-        //}
-
-
+                    }
+                }
+            }
+        }
     }
 
 
@@ -124,7 +126,44 @@ public class GuardAI : MonoBehaviour
                 _animator.SetBool("Moving", true);
         }
         _targetReached = false;
+        _coinDetected = false;
     }
 
 
+    private void CoinTossed(Vector3 coinPosition)
+    {
+        if (Vector3.Distance(coinPosition, transform.position) < _coinDetectionDistance)
+        {
+            _coinDetected = true;
+            _animator.SetBool("Moving", true);
+            _agent.SetDestination(coinPosition);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void OnDestroy()
+    {
+        UnlistenToEvents();
+    }
+
+    private void UnlistenToEvents()
+    {
+        GameEvents.current.coinTossed.RemoveListener(CoinTossed);
+    }
 }

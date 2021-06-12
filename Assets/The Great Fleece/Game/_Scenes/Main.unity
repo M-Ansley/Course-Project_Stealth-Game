@@ -40640,6 +40640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8566a7ae40a0040845c0f5f8dbadaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinTossed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1829785737
 GameObject:
   m_ObjectHideFlags: 0

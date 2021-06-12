@@ -25,4 +25,18 @@ public class GameEvents : MonoBehaviour
         }
     }
 
+    [System.Serializable]
+    public class Vector3Event : UnityEvent<Vector3>
+    {
+    }
+
+    public Vector3Event coinTossed;
+
+    public void CoinTossed(Vector3 coinPosition)
+    {
+        if (coinTossed != null)
+        {
+            coinTossed.Invoke(coinPosition);
+        }
+    }
 }

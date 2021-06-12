@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
     {
         GameObject coin = Instantiate(_coinPrefab, position, Quaternion.identity);
         AudioSource.PlayClipAtPoint(_coinTossSound, position);
+        GameEvents.current.CoinTossed(position); // calls a Vector3 Event for the guards to listen to. 
         _coinsToToss--;
     }
-}
+ }
