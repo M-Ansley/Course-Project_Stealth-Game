@@ -33846,8 +33846,6 @@ PlayableDirector:
     value: {fileID: 1983723459}
   - key: {fileID: 4630830482290828957, guid: 03cb31e7f84dffe4d8945f9cd2227654, type: 2}
     value: {fileID: 0}
-  - key: {fileID: 6855638797434894171, guid: 03cb31e7f84dffe4d8945f9cd2227654, type: 2}
-    value: {fileID: 2043896036}
   m_ExposedReferences:
     m_References:
     - f42ea2c4adbb85f4aa190c81f5b5950d: {fileID: 52476904}
@@ -50937,6 +50935,7 @@ GameObject:
   - component: {fileID: 2073984746}
   - component: {fileID: 2073984745}
   - component: {fileID: 2073984744}
+  - component: {fileID: 2073984747}
   m_Layer: 0
   m_Name: Grab_Cut_Scene_Zone
   m_TagString: Untagged
@@ -51018,6 +51017,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073984742}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2073984747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073984742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f6cd6af6b7bf548bc03462d9b45dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _grabKeycardCutscene: {fileID: 1488395905}
 --- !u!1 &2077180757
 GameObject:
   m_ObjectHideFlags: 0
