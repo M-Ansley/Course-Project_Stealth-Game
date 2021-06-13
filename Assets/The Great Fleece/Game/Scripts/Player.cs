@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
             if (Physics.Raycast(ray, out hitInfo))
             {
-                Debug.Log(hitInfo.point); // hitInfo.transform.position will return the transform.position of the object hit, not that of the point of collision
+               // Debug.Log(hitInfo.point); // hitInfo.transform.position will return the transform.position of the object hit, not that of the point of collision
                 _agent.SetDestination(hitInfo.point);
                 _animator.SetBool("Moving", true);
             }
