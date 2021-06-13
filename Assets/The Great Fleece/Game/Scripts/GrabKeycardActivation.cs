@@ -6,11 +6,17 @@ public class GrabKeycardActivation : MonoBehaviour
 {
     [SerializeField] private GameObject _grabKeycardCutscene = null;
 
+    private bool _cutscenePlayed = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            _grabKeycardCutscene.SetActive(true);
+            if (!_cutscenePlayed)
+            {
+                _grabKeycardCutscene.SetActive(true);
+                _cutscenePlayed = true;
+            }
         }
     }
 }
