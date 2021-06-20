@@ -14,6 +14,7 @@ public class GrabKeycardActivation : MonoBehaviour
         {
             if (!_cutscenePlayed)
             {
+                GameLogic.Current.HasCard = true;
                 _grabKeycardCutscene.SetActive(true);
                 _cutscenePlayed = true;
             }

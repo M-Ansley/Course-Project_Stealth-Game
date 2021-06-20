@@ -25,17 +25,18 @@ public class VoiceOverTrigger : MonoBehaviour
         {
             if (!_played && _voiceOverClip != null)
             {
-                if (_mainCameraObject != null)
-                {
-                    if (_mainCameraObject.TryGetComponent(out AudioSource audioSource))
-                    {
-                        audioSource.PlayOneShot(_voiceOverClip);
-                    }
-                }
-                else
-                {
-                    AudioSource.PlayClipAtPoint(_voiceOverClip, transform.position); // play it at the position of this object if not
-                }
+                AudioManager.Current.PlayAudioClip(_voiceOverClip);
+                //if (_mainCameraObject != null)
+                //{
+                //    if (_mainCameraObject.TryGetComponent(out AudioSource audioSource))
+                //    {
+                //        audioSource.PlayOneShot(_voiceOverClip);
+                //    }
+                //}
+                //else
+                //{
+                //    AudioSource.PlayClipAtPoint(_voiceOverClip, transform.position); // play it at the position of this object if not
+                //}
                 _played = true;
             }
         }
