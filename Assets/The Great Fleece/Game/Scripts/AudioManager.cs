@@ -23,7 +23,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource _voSource;
+
+    public AudioSource musicSource;
 
 
     private void Awake()
@@ -33,6 +35,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayAudioClip(AudioClip audioClip)
     {
-        audioSource.PlayOneShot(audioClip);
+        _voSource.PlayOneShot(audioClip);
     }
 }

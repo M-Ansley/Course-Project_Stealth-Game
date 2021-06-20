@@ -7,22 +7,39 @@ public class LookAtPlayer : MonoBehaviour
     private GameObject _player;
     public Transform startCamera;
 
-    private void Start()
+    private void Awake()
     {
-        transform.position = startCamera.position;
-        transform.rotation = startCamera.rotation;
         if (FindObjectOfType<Player>() != null)
         {
             _player = FindObjectOfType<Player>().gameObject;
         }
     }
 
+    private void Start()
+    {
+        transform.position = startCamera.position;
+        transform.rotation = startCamera.rotation;       
+    }
 
+    public void DelayedStart()
+    {
+        if (FindObjectOfType<Player>() != null)
+        {
+            _player = FindObjectOfType<Player>().gameObject;
+        }
+        transform.position = startCamera.position;
+        transform.rotation = startCamera.rotation;
+
+            
+    }
 
     // Update is called once per frame
     void Update()
     {
-        FollowPlayer();
+        if (_player != null)
+        {
+            FollowPlayer();
+        }
     }
 
     private void FollowPlayer()

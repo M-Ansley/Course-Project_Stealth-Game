@@ -14,12 +14,12 @@ public class CutsceneTrigger : MonoBehaviour
     private bool _cutscenePlayed = false;
 
 
-
     public enum CutsceneType
     {
         KeyCard = 0,
         Fail = 1,
-        Win = 2
+        Win = 2,
+        Intro = 3
     }
 
     public CutsceneType _cutsceneType;
@@ -33,9 +33,14 @@ public class CutsceneTrigger : MonoBehaviour
         {
             if (!_cutscenePlayed)
             {
-                CutsceneTypeLogic();     
+                PlayCutscene();
             }
         }
+    }
+
+    public void PlayCutscene()
+    {
+        CutsceneTypeLogic();
     }
 
     private void CutsceneTypeLogic()
@@ -53,17 +58,24 @@ public class CutsceneTrigger : MonoBehaviour
             case CutsceneType.Fail:
                 break;
             case CutsceneType.Win:
-                Debug.Log("Running 1");
                 if (GameLogic.Current.HasCard)
                 {
-                    Debug.Log("Running 2");
                     _cutsceneGameObject.SetActive(true);
                     DisableObjects();
                     GameLogic.Current.gameOver = true;
                     _cutscenePlayed = true;
                 }
+                break;
+            case CutsceneType.Intro:
+                _cutsceneGameObject.SetActive(true);
+                DisableObjects();
+                _playableDirector.stopped += EnableObjects;
+                _playableDirector.stopped += DisableCutscene;
+                _playableDirector.stopped += GameSetup;
+                _cutscenePlayed = true;
 
                 break;
+                
             default:
                 break;
         }
@@ -98,5 +110,20 @@ public class CutsceneTrigger : MonoBehaviour
     private void DisableCutscene(PlayableDirector pd)
     {
         _cutsceneGameObject.SetActive(false);
+    }
+
+    private void GameSetup(PlayableDirector pd)
+    {
+        GameLogic.Current.IntroCutsceneFinished();
+    }
+
+
+
+    public void SkipToPoint(float point)
+    {
+        if (_cutsceneGameObject != null)
+        {
+            _playableDirector.time = 58f;
+        }
     }
 }

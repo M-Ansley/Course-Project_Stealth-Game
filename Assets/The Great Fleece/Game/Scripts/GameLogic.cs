@@ -25,9 +25,13 @@ public class GameLogic : MonoBehaviour
     } // public instance property which returns a private property (which cannot be changed from the outside)
 
 
-
     [SerializeField] private GameObject _player = null;
+    [SerializeField] private CutsceneTrigger _introCutsceneTrigger;
     [SerializeField] private GameObject _gameOverCutscene = null;
+
+    [SerializeField] private LookAtPlayer _lookAtPlayer = null;
+
+    [SerializeField] private GameObject _mainAudioParent = null;
 
     public bool HasCard { get; set; } // public property. Typically best to use PascalCasing.
     
@@ -44,12 +48,29 @@ public class GameLogic : MonoBehaviour
     private void Start()
     {
         GameEvents.current.darrenCaught += DarrenCaught;
+        _introCutsceneTrigger.PlayCutscene();
+    }
+
+    public void IntroCutsceneFinished()
+    {
+        _lookAtPlayer.DelayedStart();
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            _introCutsceneTrigger.SkipToPoint(60f);
+        }
     }
 
     private void DarrenCaught()
     {
         if (!gameOver)
         {
+            //AudioManager.Current.musicSource.Stop();
+            _mainAudioParent.SetActive(false);
             _gameOverCutscene.SetActive(true);
             _player.SetActive(false);
             gameOver = true;
